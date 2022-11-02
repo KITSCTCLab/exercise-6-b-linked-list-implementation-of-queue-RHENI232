@@ -1,4 +1,4 @@
-lass Node:
+class Node:
   def __init__(self, data):
     self.data = data
     self.next = None
@@ -10,29 +10,41 @@ class Queue:
     self.last = None
 
   def enqueue(self, data) -> None:
-        new = Node(data)
-        if self.last is not None:
-            self.last.next = new
-        if self.head is None:
-            self.head = new
-        self.last = new
-
+    # Write your code here
+    if self.last==None:
+      self.last=Node(data)
+      self.last.next=None
+      self.last.data=data
+      self.head=self.last
+    else:
+      t=Node(data)
+      self.last.next=t
+      t.data=data
+      t.next=None
+      self.last=t
   def dequeue(self) -> None:
-        if not self.head is None:
-            self.head = self.head.next
-            if self.head is None: 
-              self.last = None
-
+    # Write your code here
+    t=self.head
+    if self.head==None:
+      return None
+    self.head = t.next
+    if(self.head == None):
+      self.last = None
   def status(self) -> None:
-        current = self.head
-        while current is not None:
-          print(current.data, end = "=>")
-          current = current.next
+    # Write your code here
+    t=self.head
+    if self.head==None and self.last==None:
+      print("None")
+    while(t!=None):
+      print(t.data,end="")
+      print("=>",end="")
+      t=t.next
+      if t==None:
         print("None")
 
 # Do not change the following code
 queue = Queue()
-operations = [] 
+operations = []
 for specific_operation in input().split(','):
     operations.append(specific_operation.strip())
 input_data = input()
